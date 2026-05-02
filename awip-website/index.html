@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWIP | Animal Welfare Investigations Project</title>
+  <style>
+    :root {
+      --black: #050505;
+      --charcoal: #111111;
+      --dark: #1a1a1a;
+      --red: #d71920;
+      --red-dark: #9f1117;
+      --white: #ffffff;
+      --muted: #bdbdbd;
+      --paper: #f4f1eb;
+      --line: rgba(255,255,255,0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--white);
+      background: var(--black);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .topbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 7vw;
+    }
+
+    .logo {
+      font-size: 46px;
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: .8;
+    }
+
+    .logo span { color: var(--red); }
+
+    .tagline {
+      display: block;
+      font-size: 8px;
+      letter-spacing: .8px;
+      margin-top: 6px;
+      color: #eee;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    nav a:first-child { color: var(--red); }
+
+    .outline-btn {
+      border: 1px solid rgba(255,255,255,.75);
+      padding: 15px 24px;
+    }
+
+    .hero {
+      min-height: 680px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 120px 7vw 80px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.75) 38%, rgba(0,0,0,.25) 100%),
+        url('https://images.unsplash.com/photo-1601758176175-45914394491c?auto=format&fit=crop&w=1800&q=80') center/cover;
+    }
+
+    .hero-content {
+      max-width: 620px;
+      margin-top: 40px;
+    }
+
+    .hero h1 {
+      font-size: clamp(44px, 6vw, 82px);
+      line-height: .92;
+      text-transform: uppercase;
+      margin: 0 0 28px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span { color: var(--red); }
+
+    .hero p {
+      font-size: 20px;
+      line-height: 1.55;
+      color: #f2f2f2;
+      max-width: 520px;
+      margin-bottom: 32px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 18px 28px;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 14px;
+      border: 1px solid transparent;
+    }
+
+    .btn-red { background: var(--red); }
+    .btn-red:hover { background: var(--red-dark); }
+    .btn-dark { border-color: rgba(255,255,255,.75); }
+
+    .section-light {
+      background: var(--paper);
+      color: #101010;
+      padding: 70px 7vw;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 36px;
+      line-height: 1;
+      margin: 0 0 26px;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    .underline::after {
+      content: "";
+      display: block;
+      width: 58px;
+      height: 4px;
+      background: var(--red);
+      margin-top: 14px;
+    }
+
+    .section-light p {
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    .image-card {
+      min-height: 310px;
+      background: url('https://images.unsplash.com/photo-1568572933382-74d440642117?auto=format&fit=crop&w=1200&q=80') center/cover;
+      box-shadow: 0 18px 45px rgba(0,0,0,.25);
+      filter: grayscale(100%);
+    }
+
+    .what-we-do {
+      background: radial-gradient(circle at center, #191919, #050505 70%);
+      padding: 70px 7vw;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 36px;
+    }
+
+    .card {
+      padding: 34px 30px;
+      border-right: 1px solid var(--line);
+    }
+
+    .card:last-child { border-right: 0; }
+
+    .icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--red);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 22px;
+      font-size: 34px;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      font-size: 22px;
+    }
+
+    .card p {
+      color: #d8d8d8;
+      line-height: 1.5;
+      margin: 0 auto;
+      max-width: 290px;
+    }
+
+    .seen {
+      background: var(--paper);
+      color: #111;
+      text-align: center;
+      padding: 50px 7vw;
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(22px, 4vw, 58px);
+      flex-wrap: wrap;
+      margin: 28px 0 20px;
+      font-size: 28px;
+      font-weight: 900;
+      opacity: .9;
+    }
+
+    .media-link {
+      color: var(--red);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      min-height: 360px;
+      background: #080808;
+    }
+
+    .feature-img {
+      background: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1200&q=80') center/cover;
+      filter: grayscale(70%);
+    }
+
+    .feature-copy {
+      padding: 70px 7vw 70px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      color: var(--red);
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 14px;
+    }
+
+    .feature h2 { margin-bottom: 18px; }
+
+    .feature p {
+      color: #e0e0e0;
+      font-size: 17px;
+      line-height: 1.55;
+      max-width: 530px;
+    }
+
+    .membership {
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.85), rgba(80,0,0,.72)),
+        linear-gradient(135deg, #3b0000, #0a0a0a);
+      padding: 70px 7vw;
+    }
+
+    .membership-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.6fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .membership p {
+      color: #f3f3f3;
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 500px;
+    }
+
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .tier {
+      background: rgba(0,0,0,.78);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 28px 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .popular::before {
+      content: "MOST POPULAR";
+      position: absolute;
+      top: -28px;
+      left: 0;
+      right: 0;
+      background: var(--red);
+      font-size: 12px;
+      font-weight: 900;
+      padding: 7px;
+    }
+
+    .tier h3 {
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      font-size: 24px;
+    }
+
+    .price {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .tier p {
+      font-size: 14px;
+      color: #d8d8d8;
+      min-height: 54px;
+    }
+
+    footer {
+      background: #050505;
+      padding: 45px 7vw 28px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 36px;
+    }
+
+    footer p, footer a {
+      color: #cfcfcf;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    footer h4 {
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .copyright {
+      margin-top: 36px;
+      text-align: center;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .mobile-sticky {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--red);
+      padding: 16px;
+      z-index: 100;
+      text-align: center;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .topbar { padding: 24px; }
+      .hero { padding: 120px 24px 70px; min-height: 640px; }
+      .split, .feature, .membership-grid { grid-template-columns: 1fr; }
+      .cards, .tiers, .footer-grid { grid-template-columns: 1fr; }
+      .card { border-right: 0; border-bottom: 1px solid var(--line); }
+      .feature-copy { padding: 50px 24px; }
+      .section-light, .what-we-do, .seen, .membership, footer { padding-left: 24px; padding-right: 24px; }
+      .mobile-sticky { display: block; }
+      body { padding-bottom: 54px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="#" class="logo">AW<span>i</span>P <small class="tagline">ANIMAL WELFARE INVESTIGATIONS PROJECT</small></a>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#investigations">Investigations</a>
+      <a href="#seen">As Seen In</a>
+      <a href="#about">About</a>
+      <a href="#member" class="outline-btn">Become a Member</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Investigating and Exposing <span>Animal Cruelty</span></h1>
+      <p>AWIP conducts undercover investigations, supports prosecutions, and trains law enforcement to stop organised animal abuse.</p>
+      <div class="button-row">
+        <a class="btn btn-red" href="#member">Become a Member</a>
+        <a class="btn btn-dark" href="#investigations">Our Investigations</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section-light">
+    <div class="split">
+      <div>
+        <h2 class="underline">Who We Are</h2>
+        <p>The Animal Welfare Investigations Project is an independent organisation dedicated to exposing animal cruelty and bringing offenders to justice.</p>
+        <p>We work across borders, collaborate with authorities, and provide training to help build a stronger response to animal crime.</p>
+        <a class="btn" style="border-color:#d71920;color:#d71920;margin-top:12px;" href="#">Learn More About Us</a>
+      </div>
+      <div class="image-card" aria-label="Rescued dog behind bars"></div>
+    </div>
+  </section>
+
+  <section class="what-we-do">
+    <h2 class="underline" style="display:inline-block;">What We Do</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">⌕</div>
+        <h3>Investigations</h3>
+        <p>Undercover investigations that expose organised animal cruelty, illegal trade and exploitation.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚖</div>
+        <h3>Prosecutions</h3>
+        <p>Supporting legal action and working with prosecutors to bring offenders to justice.</p>
+      </div>
+      <div class="card">
+        <div class="icon">▣</div>
+        <h3>Training</h3>
+        <p>Training law enforcement and professionals to better investigate animal crime.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="seen" class="seen">
+    <h2 class="underline" style="display:inline-block;">As Seen In</h2>
+    <div class="logos">
+      <span>BBC</span>
+      <span>The Guardian</span>
+      <span>ITV News</span>
+      <span>Sky News</span>
+      <span>Daily Mail</span>
+      <span>Reuters</span>
+      <span>Channel 4</span>
+    </div>
+    <a href="#" class="media-link">View all media coverage ›</a>
+  </section>
+
+  <section id="investigations" class="feature">
+    <div class="feature-img"></div>
+    <div class="feature-copy">
+      <div class="eyebrow">Featured Investigation</div>
+      <h2>Inside the Philippines Dog Meat Trade</h2>
+      <p>AWIP investigators went undercover to expose a brutal industry stealing and slaughtering dogs for human consumption. Our evidence is helping bring change and save lives.</p>
+      <p><a class="btn btn-red" href="#">Read the Full Story</a></p>
+    </div>
+  </section>
+
+  <section id="member" class="membership">
+    <div class="membership-grid">
+      <div>
+        <h2>Become a Member</h2>
+        <p>Your monthly support funds investigations that expose cruelty and help bring abusers to justice.</p>
+        <p><em>Together, we can create a world where animals are protected.</em></p>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <a class="btn btn-red" href="#" style="font-size:16px;padding:20px 40px;">Become a Member</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="font-size:42px;">AW<span>i</span>P</div>
+        <p>AWIP is dedicated to investigating animal cruelty, supporting prosecutions, and training law enforcement.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <p><a href="#">Investigations</a><br><a href="#">As Seen In</a><br><a href="#">About Us</a><br><a href="#">Contact</a></p>
+      </div>
+      <div>
+        <h4>Get in Touch</h4>
+        <p>info@awip.org<br>Facebook · X · Instagram · YouTube</p>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <p><a href="#">Privacy Policy</a><br><a href="#">Terms & Conditions</a><br><a href="#">Cookies Policy</a></p>
+      </div>
+    </div>
+    <div class="copyright">© 2026 AWIP. All rights reserved.</div>
+  </footer>
+
+  <a href="#member" class="mobile-sticky">Become a Member</a>
+</body>
+</html>
